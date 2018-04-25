@@ -29,7 +29,12 @@ class Application {
             caches.open(that.CACHE_NAME)
                 .then(function (cache) {
                     console.log('Opened cache');
-                    return cache.addAll(that.urlsToCache);
+                    cache.addAll(that.urlsToCache)
+                        .then(function(value) {
+                            return value;
+                        }, function(err) {
+                            console.error(err);
+                        });
                 }, function(err) {
                     console.error(err);
                 }
