@@ -5,7 +5,12 @@ class Application {
         this.CACHE_NAME = 'pwa-cache-v1';
         this.urlsToCache = [
             './',
+            './index.js',
+            './index.html',
+            './build/',
+            './build/css/',
             './build/css/styles.css',
+            './assets/',
             './assets/img/'
         ];
 
@@ -15,12 +20,18 @@ class Application {
         that = this;
     }
 
+    /**
+     * Install ServiceWorker
+     * @param {InstallEvent} event 
+     */
     onInstall(event) {
         event.waitUntil(
             caches.open(that.CACHE_NAME)
                 .then(function (cache) {
                     console.log('Opened cache');
                     return cache.addAll(that.urlsToCache);
+                }, function(err) {
+                    console.error(err);
                 }
             )
         );
@@ -51,12 +62,18 @@ class Application {
                             caches.open(that.CACHE_NAME)
                                 .then(function(cache) {
                                     cache.put(event.request, responseToCache);
+                                }, function(err) {
+                                    console.error(err);
                                 }
                             );
 
                             return response;
+                        }, function(err) {
+                            console.error(err);
                         }
                     );
+                }, function (err) {
+                    console.error(err);
                 }
             )
         );
