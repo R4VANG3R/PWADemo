@@ -8,6 +8,8 @@ class Application {
             './index.js',
             './index.html',
             './build/',
+            './build/js/',
+            './build/js/scripts.js',
             './build/css/',
             './build/css/styles.css',
             './assets/',
@@ -16,6 +18,7 @@ class Application {
 
         self.addEventListener('install', this.onInstall);
         self.addEventListener('fetch', this.onFetch);
+        self.addEventListener('activate', this.onActivate);
 
         that = this;
     }
@@ -81,6 +84,26 @@ class Application {
                     console.error(err);
                 }
             )
+        );
+    }
+
+    /**
+     * On ServiceWorker activate (post update)
+     * @param {ActivateEvent} event 
+     */
+    onActivate(event) {
+        var cacheWhitelist = [that.CACHE_NAME];
+
+        event.waitUntil(
+            caches.keys().then(function(cacheNames) {
+                return Promise.all(
+                    cacheNames.map(function(cacheName) {
+                        if (cacheWhitelist.indexOf(cacheName) === -1) {
+                            return caches.delete(cacheName);
+                        }
+                    })
+                );
+            })
         );
     }
 }
