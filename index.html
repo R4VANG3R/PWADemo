@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<!--
+👽 AlienTrick.com Media Creators
+===============================
+🏠   Oosterveldsingel 51
+    7558 PJ  Hengelo (Ov)
+    The Netherlands
+
+📱   Tel. +31 (0)74-7620200
+     Fax: +31 (0)74-7620201
+🌎   http://www.alientrick.com
+📧   info@alientrick.com
+-->
+<html lang="en">
+
+<head>
+    <title>PWA Pop</title>
+    <meta name="description" content="PWA Pop App" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="./build/css/styles.css" media="all" />
+    <link rel="manifest" href="/manifest.json">
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/img/favicons/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/assets/img/favicons/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/assets/img/favicons/favicon-16x16.png" sizes="16x16" />
+    <meta name="msapplication-TileImage" content="/assets/img/favicons/mstile-144x144.png" />
+
+    <meta name="theme-color" content="#F00" />
+    <meta name="application-name" content="PWA Pop" />
+    <meta name="msapplication-TileColor" content="#F00" />
+</head>
+
+<body>
+    <main>
+        <h1>PWA Master Race</h1>
+        <p>
+            hurr durr
+        </p>
+    </main>
+
+    <script>
+        var installPrompt;
+
+        window.addEventListener('beforeinstallprompt', function (e) {
+            console.log('beforeinstallprompt Event fired');
+            // e.preventDefault();
+            // installPrompt = e;
+            // return false;
+
+            e.userChoice.then(function (choiceResult) {
+                console.log(choiceResult.outcome);
+
+                if (choiceResult.outcome === 'dismissed') {
+                    console.log('User cancelled home screen install');
+                } else {
+                    console.log('User added to home screen');
+                }
+            });
+        });
+
+
+        function PromptInstall(installPrompt) {
+            if (installPrompt === undefined) return false;
+
+            installPrompt.prompt();
+
+            installPrompt.userChoice.then(function (choiceResult) {
+                console.log(choiceResult.outcome);
+
+                installPrompt = null;
+
+                return choiceResult.outcome !== 'dismissed';
+            });
+            return false;
+        }
+    </script>
+</body>
+
+</html>

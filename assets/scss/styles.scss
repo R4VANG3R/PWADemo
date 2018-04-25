@@ -1,0 +1,11 @@
+@import "./_reset.scss";
+
+main {
+    margin: 0 auto;
+    max-width: 1170px;
+    min-height: 100vh;
+    color: #F00;
+    background: #333;
+    padding: 15px;
+    font-family: Helvetica, Arial, sans-serif;
+}
