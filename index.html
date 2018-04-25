@@ -55,11 +55,24 @@
 
                 if (choiceResult.outcome === 'dismissed') {
                     console.log('User cancelled home screen install');
+                    alert('ahw :(');
                 } else {
                     console.log('User added to home screen');
+                    alert('Yay!');
                 }
             });
         });
+
+        // create ServiceWorker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('./index.js').then(function(registration) {
+                    console.log(`ServiceWorker registration successful with scope: ${registration.scope}`);
+                }, function(err) {
+                    console.error(`ServiceWorker registration failed: ${err}`);
+                });
+            });
+        }
 
 
         function PromptInstall(installPrompt) {
