@@ -1,17 +1,22 @@
-function SendNotification(message) {
+function SendNotification(title, message) {
     if (Notification.permission !== 'granted') {
         Notification.requestPermission(function (status) {
             console.log(status);
         }).then(function(value) {
-            ShowNotification(message);
+            ShowNotification(title, message);
         });
     } else {
-       ShowNotification(message); 
+       ShowNotification(title, message);
     }
 }
 
-function ShowNotification(message) {
+function ShowNotification(title, message) {
     navigator.serviceWorker.getRegistration().then(function (reg) {
-        reg.showNotification(message);
+        reg.showNotification(title, {
+            iconUrl: './../../assets/img/icon-128.png',
+            type: 'basic',
+            title: title,
+            message: message
+        });
     });
 }
