@@ -14,6 +14,7 @@ class Application {
         self.addEventListener('install', this.onInstall);
         self.addEventListener('fetch', this.onFetch);
         self.addEventListener('activate', this.onActivate);
+        self.addEventListener('notificationclick', this.onNotificationClick);
 
         that = this;
     }
@@ -67,6 +68,29 @@ class Application {
             })
         );
         return self.clients.claim();
+    }
+
+    /**
+     * User clicks on notification
+     * @param {Event} event 
+     */
+    onNotificationClick(event) {
+        console.log('Notification click!', event);
+        event.notification.close();
+
+        event.waitUntil(clients.matchAll({
+            type: "window"
+        }).then(clientList => {
+            clientList.forEach(client => {
+                if (client.url === 'https://r4vang3r.github.io/PWADemo/' && 'focus' in client) {
+                    return client.focus();
+                }                
+            });
+
+            if (clients.openWindow) {
+                return clients.openWindow('/');
+            }
+        }));
     }
 }
 
