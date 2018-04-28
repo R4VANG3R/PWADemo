@@ -82,13 +82,13 @@ class Application {
             type: "window"
         }).then(clientList => {
             clientList.forEach(client => {
-                if (client.url === 'https://r4vang3r.github.io/PWADemo/' && 'focus' in client) {
+                if (client.url === './' && 'focus' in client) {
                     return client.focus();
                 }                
             });
 
             if (clients.openWindow) {
-                return clients.openWindow('/');
+                return clients.openWindow('./');
             }
         }));
     }
