@@ -34,22 +34,32 @@
 </head>
 
 <body>
+    <header>
+        <div class="container">
+            <h1>PWA Master Race</h1>
+        </div>
+    </header>
+
     <main>
-        <h1>PWA Master Race</h1>
-        <p>
-            hurr durr
-        </p>
+        <div class="container">
+            <p>
+                hurr durr
+            </p>
+            
+            <button onclick="SendNotification('Kappa world!', 'This notification is a test, so do with it as you will.')">Push Notification</button>
 
-        <button onclick="SendNotification('Kappa world!', 'This notification is a test, so do with it as you will.')">Push Notification</button>
+            <button onclick="new ShareService().share(new ShareModel('KappaPride!', 'PWA is Kappa', './'))">Share</button>
 
-        <button onclick="new ShareService().share(new ShareModel('KappaPride!', 'PWA is Kappa', './'))">Share</button>
+            <a href="https://www.alientrick.com">Extern linkje</a>
+            <a href="./test.html">Intern linkje</a>
 
-        <a href="https://www.alientrick.com">Extern linkje</a>
-        <a href="./test.html">Intern linkje</a>
-
-        <form>
-            <input type="file" placeholder="choose a file...">
-        </form>
+            <form>
+                <label>
+                    Choose a file...
+                    <input type="file" placeholder="choose a file...">
+                </label>
+            </form>
+        </div>
     </main>
 
     <script>
@@ -76,10 +86,10 @@
 
         // create ServiceWorker
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('./service-worker.js').then(function(registration) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
                     console.log(`ServiceWorker registration successful with scope: ${registration.scope}`);
-                }, function(err) {
+                }, function (err) {
                     console.error(`ServiceWorker registration failed: ${err}`);
                 });
             });
