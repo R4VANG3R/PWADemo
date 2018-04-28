@@ -15,8 +15,8 @@ function SendNotification(title, message) {
 function ShowNotification(title, message) {
   navigator.serviceWorker.getRegistration().then(function (reg) {
     reg.showNotification(title, {
-      icon: './assets/img/icon-96.png',
-      badge: './assets/img/icon-96.png',
+      icon: './assets/img/icon-192.png',
+      badge: './assets/img/icon-128.png',
       body: message,
       vibrate: [200, 100, 200, 100, 200, 100, 200],
       tag: 'test-notification'
