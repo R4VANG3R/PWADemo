@@ -20,6 +20,8 @@ body {
     max-width: 1170px;
 }
 
+
+
 p {
     margin-bottom: 1rem;
 }
@@ -31,6 +33,14 @@ header {
 
     .container {
         padding: 5px 15px;
+        display: flex;
+        flex-direction: row wrap;
+        justify-content: start;
+        align-items: center;
+    }
+
+    .logo {
+        width: 50px;
     }
 }
 
