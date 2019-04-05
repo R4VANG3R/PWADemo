@@ -1,10 +1,10 @@
 class Application {
   constructor() {
-    this.CACHE_NAME = 'pwa-cache-v1';
+    this.CACHE_NAME = 'pwa-cache-v1.0.1';
     this.filesToCache = [
       './',
       './index.html',
-      './build/js/scripts.js',
+      './build/js/main.bundle.js',
       './build/css/styles.css',
       './service-worker.js'
     ];
@@ -20,12 +20,14 @@ class Application {
    * @param {InstallEvent} event
    */
   onInstall(event) {
+    const self = this;
+
     event.waitUntil(
         caches.open(this.CACHE_NAME)
             .then(function (cache) {
                 console.log('Opened cache');
 
-                cache.addAll(this.filesToCache)
+                cache.addAll(self.filesToCache)
                     .catch(reason => console.error(reason))
             })
             .catch(reason => console.warn(reason))
