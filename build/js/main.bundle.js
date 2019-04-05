@@ -130,11 +130,15 @@ function () {
       }, options);
 
       if (Notification.permission !== 'granted') {
-        Notification.requestPermission().then(function (value) {
-          new Notification(title, opts);
+        Notification.requestPermission().then(function (result) {
+          navigator.serviceWorker.getRegistration().then(function (registration) {
+            registration.showNotification(title, opts);
+          });
         });
       } else {
-        new Notification(title, opts);
+        navigator.serviceWorker.getRegistration().then(function (registration) {
+          registration.showNotification(title, opts);
+        });
       }
     }
   }]);
@@ -291,7 +295,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var SERVICEWORKER = './service-worker.js';
+var SERVICEWORKER = '/service-worker.js';
 
 var Main =
 /*#__PURE__*/
@@ -301,7 +305,7 @@ function () {
 
     window.addEventListener('beforeinstallprompt', this.handleInstall.bind(this));
 
-    if ('serviceworker' in navigator) {
+    if ('serviceWorker' in navigator) {
       window.addEventListener('load', this.registerServiceWorker.bind(this));
     }
 

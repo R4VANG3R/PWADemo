@@ -1,5 +1,3 @@
-var that;
-
 class Application {
   constructor() {
     this.CACHE_NAME = 'pwa-cache-v1';
@@ -11,12 +9,10 @@ class Application {
       './service-worker.js'
     ];
 
-    self.addEventListener('install', this.onInstall);
-    self.addEventListener('fetch', this.onFetch);
-    self.addEventListener('activate', this.onActivate);
-    self.addEventListener('notificationclick', this.onNotificationClick);
-
-    that = this;
+    self.addEventListener('install', this.onInstall.bind(this));
+    self.addEventListener('fetch', this.onFetch.bind(this));
+    self.addEventListener('activate', this.onActivate.bind(this));
+    self.addEventListener('notificationclick', this.onNotificationClick.bind(this));
   }
 
   /**
@@ -24,16 +20,16 @@ class Application {
    * @param {InstallEvent} event
    */
   onInstall(event) {
-    // event.waitUntil(
-    //     caches.open(that.CACHE_NAME)
-    //         .then(function (cache) {
-    //             console.log('Opened cache');
+    event.waitUntil(
+        caches.open(this.CACHE_NAME)
+            .then(function (cache) {
+                console.log('Opened cache');
 
-    //             cache.addAll(that.filesToCache)
-    //                 .catch(reason => console.error(reason))
-    //         })
-    //         .catch(reason => console.warn(reason))
-    // );
+                cache.addAll(this.filesToCache)
+                    .catch(reason => console.error(reason))
+            })
+            .catch(reason => console.warn(reason))
+    );
   }
 
   /**
@@ -41,13 +37,13 @@ class Application {
    * @param {FetchEvent} event
    */
   onFetch(event) {
-    // event.respondWith(
-    //     caches.match(event.request)
-    //         .then(response => {
-    //             return response || fetch(event.request);
-    //         })
-    //         .catch(reason => console.warn(reason))
-    // );
+    event.respondWith(
+        caches.match(event.request)
+            .then(response => {
+                return response || fetch(event.request);
+            })
+            .catch(reason => console.warn(reason))
+    );
   }
 
   /**
@@ -55,20 +51,20 @@ class Application {
    * @param {ActivateEvent} event
    */
   onActivate(event) {
-    // var cacheWhitelist = [that.CACHE_NAME];
+    var cacheWhitelist = [this.CACHE_NAME];
 
-    // event.waitUntil(
-    //     caches.keys().then(function(cacheNames) {
-    //         return Promise.all(
-    //             cacheNames.map(function(cacheName) {
-    //                 if (cacheWhitelist.indexOf(cacheName) === -1) {
-    //                     return caches.delete(cacheName);
-    //                 }
-    //             })
-    //         );
-    //     })
-    // );
-    // return self.clients.claim();
+    event.waitUntil(
+        caches.keys().then(function(cacheNames) {
+            return Promise.all(
+                cacheNames.map(function(cacheName) {
+                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
+    );
+    return self.clients.claim();
   }
 
   /**
@@ -96,4 +92,4 @@ class Application {
   }
 }
 
-var app = new Application();
+const app = new Application();

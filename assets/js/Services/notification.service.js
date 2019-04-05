@@ -14,11 +14,15 @@ export default class NotificationService {
     }, options);
 
     if (Notification.permission !== 'granted') {
-      Notification.requestPermission().then(value => {
-        new Notification(title, opts);
+      Notification.requestPermission().then(result => {
+        navigator.serviceWorker.getRegistration().then(registration => {
+          registration.showNotification(title, opts);
+        })
       });
     } else {
-      new Notification(title, opts);
+      navigator.serviceWorker.getRegistration().then(registration => {
+        registration.showNotification(title, opts);
+      })
     }
   }
 }
