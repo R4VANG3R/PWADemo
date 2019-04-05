@@ -97,7 +97,7 @@ class Main {
   }
 
   handlePleasureClick(event) {
-    navigator.vibrate(200);
+    navigator.vibrate([100, 0, 100, 0, 100, 0, 300, 0, 300, 0, 300, 0, 100, 0, 100, 0, 100]);
   }
 }
 
