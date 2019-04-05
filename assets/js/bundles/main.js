@@ -27,7 +27,7 @@ class Main {
 
     const fg = new ForegroundService();
 
-    document.querySelector("#txtNetworkInfo").innerHTML = `Speed: ${navigator.connection.downlink} MB/s<br>Latency: ${navigator.connection.rtt}`;
+    document.querySelector("#txtNetworkInfo").innerHTML = `Speed: ${navigator.connection.downlink / 8} MB/s<br>Latency: ${navigator.connection.rtt}`;
     BatteryService.batteryLevel().then(level => {
       document.querySelector("#txtBattery").innerHTML = level * 100 + " %";
     })

@@ -361,7 +361,7 @@ function () {
     document.querySelector("#btnScreencapture").addEventListener('click', this.handleScreencaptureClick.bind(this));
     document.querySelector("#btnPleasure").addEventListener('click', this.handlePleasureClick.bind(this));
     var fg = new _foreground.default();
-    document.querySelector("#txtNetworkInfo").innerHTML = "Speed: ".concat(navigator.connection.downlink, " MB/s<br>Latency: ").concat(navigator.connection.rtt);
+    document.querySelector("#txtNetworkInfo").innerHTML = "Speed: ".concat(navigator.connection.downlink / 8, " MB/s<br>Latency: ").concat(navigator.connection.rtt);
 
     _battery.default.batteryLevel().then(function (level) {
       document.querySelector("#txtBattery").innerHTML = level * 100 + " %";
