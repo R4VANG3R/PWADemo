@@ -22,6 +22,7 @@ class Main {
     document.querySelector("#btnNotify").addEventListener('click', this.handleNotifyClick.bind(this));
     document.querySelector("#btnBluetooth").addEventListener('click', this.handleBluetoothClick.bind(this));
     document.querySelector("#btnScreencapture").addEventListener('click', this.handleScreencaptureClick.bind(this));
+    document.querySelector("#btnPleasure").addEventListener('click', this.handlePleasureClick.bind(this));
 
     const fg = new ForegroundService();
   }
@@ -93,6 +94,10 @@ class Main {
 
   handleScreencaptureClick(event) {
     new ScreencaptureService(document.querySelector("#vidScreencapture"));
+  }
+
+  handlePleasureClick(event) {
+    navigator.vibrate(200);
   }
 }
 

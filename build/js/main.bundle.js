@@ -316,6 +316,7 @@ function () {
     document.querySelector("#btnNotify").addEventListener('click', this.handleNotifyClick.bind(this));
     document.querySelector("#btnBluetooth").addEventListener('click', this.handleBluetoothClick.bind(this));
     document.querySelector("#btnScreencapture").addEventListener('click', this.handleScreencaptureClick.bind(this));
+    document.querySelector("#btnPleasure").addEventListener('click', this.handlePleasureClick.bind(this));
     var fg = new _foreground.default();
   }
 
@@ -394,6 +395,11 @@ function () {
     key: "handleScreencaptureClick",
     value: function handleScreencaptureClick(event) {
       new _screencapture.default(document.querySelector("#vidScreencapture"));
+    }
+  }, {
+    key: "handlePleasureClick",
+    value: function handlePleasureClick(event) {
+      navigator.vibrate(200);
     }
   }]);
 

@@ -1,6 +1,6 @@
 class Application {
   constructor() {
-    this.CACHE_NAME = 'pwa-cache-v1.0.1';
+    this.CACHE_NAME = 'pwa-cache-v1.0.2';
     this.filesToCache = [
       './',
       './index.html',
