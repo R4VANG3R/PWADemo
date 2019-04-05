@@ -4,7 +4,7 @@ import BluetoothService from "../Services/bluetooth.service";
 import ForegroundService from "../Services/foreground.service";
 import ScreencaptureService from "../Services/screencapture.service";
 
-const SERVICEWORKER = '/service-worker.js';
+const SERVICEWORKER = './service-worker.js';
 
 class Main {
   constructor() {
