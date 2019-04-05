@@ -2,9 +2,10 @@
   "name": "pwapop",
   "version": "1.0.0",
   "description": "PWA Pop",
-  "main": "index.js",
+  "main": "build/js/main.bundle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "gulp",
+    "watch": "gulp watch"
   },
   "keywords": [
     "PWA"
@@ -12,16 +13,37 @@
   "author": "Ivon Göttgens",
   "license": "MIT",
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.42",
-    "@babel/preset-env": "^7.0.0-beta.42",
-    "browser-sync": "^2.23.7",
-    "gulp": "^3.9.1",
-    "gulp-autoprefixer": "^5.0.0",
-    "gulp-babel": "^8.0.0-beta.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-sass": "^4.0.1",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.0",
-    "node-sass": "^4.8.3"
-  }
+    "@babel/core": "~7.4.3",
+    "@babel/plugin-proposal-optional-chaining": "~7.2.0",
+    "@babel/preset-env": "~7.4.3",
+    "babelify": "~10.0.0",
+    "browser-sync": "~2.26.3",
+    "browserify": "~16.2.3",
+    "event-stream": "~4.0.1",
+    "glob": "~7.1.3",
+    "gulp": "~3.9.1",
+    "gulp-autoprefixer": "~6.0.0",
+    "gulp-concat": "~2.6.1",
+    "gulp-rename": "~1.4.0",
+    "gulp-sass": "~4.0.2",
+    "gulp-sourcemaps": "~2.6.5",
+    "gulp-uglify": "~3.0.2",
+    "node-sass": "~4.11.0",
+    "vinyl-buffer": "~1.0.1",
+    "vinyl-source-stream": "~2.0.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-optional-chaining"
+    ]
+  },
+  "browserslist": [
+    "last 2 versions",
+    "> 5%",
+    "not dead",
+    "not IE 11"
+  ]
 }

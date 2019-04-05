@@ -14,106 +14,68 @@
 <html lang="en">
 
 <head>
-    <title>PWA Pop</title>
-    <meta name="description" content="PWA Pop App" />
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PWA Pop</title>
+  <meta name="description" content="PWA Pop App" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" type="text/css" href="./build/css/styles.css" media="all" />
-    <link rel="manifest" href="./manifest.json">
+  <link rel="stylesheet" type="text/css" href="./build/css/styles.css" media="all" />
+  <link rel="manifest" href="./manifest.json">
 
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./assets/img/favicons/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./assets/img/favicons/apple-touch-icon-152x152.png" />
-    <link rel="icon" type="image/png" href="./assets/img/favicons/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="./assets/img/favicons/favicon-16x16.png" sizes="16x16" />
-    <meta name="msapplication-TileImage" content="./assets/img/favicons/mstile-144x144.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="./assets/img/favicons/apple-touch-icon-144x144.png" />
+  <link rel="apple-touch-icon-precomposed" sizes="152x152" href="./assets/img/favicons/apple-touch-icon-152x152.png" />
+  <link rel="icon" type="image/png" href="./assets/img/favicons/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./assets/img/favicons/favicon-16x16.png" sizes="16x16" />
+  <meta name="msapplication-TileImage" content="./assets/img/favicons/mstile-144x144.png" />
 
-    <meta name="theme-color" content="#ff6e40" />
-    <meta name="application-name" content="PWA Pop" />
-    <meta name="msapplication-TileColor" content="#ff6e40" />
+  <meta name="theme-color" content="#ff6e40" />
+  <meta name="application-name" content="PWA Pop" />
+  <meta name="msapplication-TileColor" content="#ff6e40" />
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <img src="./assets/img/icon-128.png" class="logo" rel="logo">
-            <h1>PWA Master Race</h1>
-        </div>
-    </header>
+  <header>
+    <div class="container">
+      <img src="./assets/img/icon-128.png" class="logo" rel="logo">
+      <h1>PWA Master Race</h1>
+    </div>
+  </header>
 
-    <main>
-        <div class="container">
-            <p>
-                hurr durr
-            </p>
+  <main>
+    <div class="container">
+      <p>
+        hurr durr
+      </p>
 
-            <button onclick="SendNotification('Kappa world!', 'This notification is a test, so do with it as you will.')">Push Notification</button>
+      <button id="btnNotify">
+        Push Notification
+      </button>
 
-            <button onclick="new ShareService().share(new ShareModel('KappaPride!', 'PWA is Kappa', './'))">Share</button>
+      <button id="btnShare">
+        Share
+      </button>
 
-            <a href="https://www.alientrick.com">Extern linkje</a>
-            <a href="./test.html">Intern linkje</a>
+      <a href="https://www.alientrick.com">Extern linkje</a>
+      <a href="./test.html">Intern linkje</a>
 
-            <form>
-                <label>
-                    Choose a file...
-                    <input type="file" placeholder="choose a file...">
-                </label>
-            </form>
-        </div>
-    </main>
+      <form>
+        <label>
+          Choose a file...
+          <input type="file" placeholder="choose a file...">
+        </label>
+      </form>
 
-    <script>
-        var installPrompt;
+      <div class="">
+        <button id="btnBluetooth">Find bluetooth devices</button>
+        <div id="listBluetoothDevices"></div>
+      </div>
 
-        window.addEventListener('beforeinstallprompt', function (e) {
-            console.log('beforeinstallprompt Event fired');
-            // e.preventDefault();
-            // installPrompt = e;
-            // return false;
+      <video id="vidScreencapture" autoplay style="max-width: 100%"></video>
+      <button id="btnScreencapture">Capture screen</button>
+    </div>
+  </main>
 
-            e.userChoice.then(function (choiceResult) {
-                console.log(choiceResult.outcome);
-
-                if (choiceResult.outcome === 'dismissed') {
-                    console.log('User cancelled home screen install');
-                    alert('ahw :(');
-                } else {
-                    console.log('User added to home screen');
-                    alert('Yay!');
-                }
-            });
-        });
-
-        // create ServiceWorker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function () {
-                navigator.serviceWorker.register('./service-worker.js').then(function (registration) {
-                    console.log(`ServiceWorker registration successful with scope: ${registration.scope}`);
-                }, function (err) {
-                    console.error(`ServiceWorker registration failed: ${err}`);
-                });
-            });
-        }
-
-
-        function PromptInstall(installPrompt) {
-            if (installPrompt === undefined) return false;
-
-            installPrompt.prompt();
-
-            installPrompt.userChoice.then(function (choiceResult) {
-                console.log(choiceResult.outcome);
-
-                installPrompt = null;
-
-                return choiceResult.outcome !== 'dismissed';
-            });
-            return false;
-        }
-    </script>
-
-    <script src="./build/js/scripts.js"></script>
+  <script src="./build/js/main.bundle.js"></script>
 </body>
 
 </html>

@@ -5,7 +5,7 @@ $black: #333;
 $orange: #ff6e40;
 $gradient: linear-gradient(45deg, #8e24aa 0%, #ff6e40 100%);
 
-html, 
+html,
 body {
     background: $white;
     color: $black;
@@ -14,7 +14,7 @@ body {
     line-height: 1.5;
 }
 
-.container {    
+.container {
     padding: 15px;
     margin: 0 auto;
     max-width: 1170px;
@@ -35,7 +35,7 @@ header {
         padding: 5px 15px;
         display: flex;
         flex-direction: row wrap;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
     }
 
@@ -56,12 +56,12 @@ button {
     text-transform: uppercase;
     font-weight: bold;
     border-radius: 5px;
-    outline: none;    
+    outline: none;
     letter-spacing: .5px;
 
     &:hover {
-        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14), 
-            0 1px 7px 0 rgba(0, 0, 0, 0.12), 
+        box-shadow: 0 3px 3px 0 rgba(0, 0, 0, 0.14),
+            0 1px 7px 0 rgba(0, 0, 0, 0.12),
             0 3px 1px -1px rgba(0, 0, 0, 0.2);
     }
 }
