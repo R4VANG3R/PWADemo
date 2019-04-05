@@ -17,7 +17,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  * @see {@link https://googlechrome.github.io/samples/web-bluetooth/device-info.html}
  *
  * At the time of writing this API is very unstable and useless.
- * Devices show up as unsupported missing their names, and it does not work on mobile.
+ * Devices show up as unsupported missing their names, and it works terrible on mobile.
  */
 var BluetoothService =
 /*#__PURE__*/
@@ -121,39 +121,28 @@ function () {
      * @param {NotificationOptions} options
      */
     value: function showNotification(title, options) {
+      var opts = Object.assign({
+        icon: './assets/img/icon-192.png',
+        badge: './assets/img/icon-128.png',
+        body: "",
+        vibrate: [200, 100, 200, 100, 200, 100, 200],
+        tag: 'test-notification'
+      }, options);
+
       if (Notification.permission !== 'granted') {
         Notification.requestPermission().then(function (value) {
-          sendNotification(title, options);
+          new Notification(title, opts);
         });
       } else {
-        sendNotification(title, options);
+        new Notification(title, opts);
       }
     }
   }]);
 
   return NotificationService;
 }();
-/**
- *
- * @param {string} title
- * @param {NotificationOptions} options
- */
-
 
 exports.default = NotificationService;
-
-function sendNotification(title, options) {
-  var opts = Object.assign({
-    icon: './assets/img/icon-192.png',
-    badge: './assets/img/icon-128.png',
-    body: "",
-    vibrate: [200, 100, 200, 100, 200, 100, 200],
-    tag: 'test-notification'
-  }, options);
-  navigator.serviceWorker.getRegistration().then(function (reg) {
-    reg.showNotification(title, opts);
-  });
-}
 
 },{}],4:[function(require,module,exports){
 "use strict";
@@ -169,6 +158,11 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+/**
+ * @fileoverview Screencapture / sharing service. Handles sharing your screen.
+ *
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Screen_Capture_API}
+ */
 var ScreencaptureService =
 /*#__PURE__*/
 function () {

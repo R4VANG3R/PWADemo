@@ -1,3 +1,9 @@
+/**
+ * @fileoverview Screencapture / sharing service. Handles sharing your screen.
+ *
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/Screen_Capture_API}
+ */
+
 export default class ScreencaptureService {
   /**
    *

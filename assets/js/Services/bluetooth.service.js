@@ -3,7 +3,7 @@
  * @see {@link https://googlechrome.github.io/samples/web-bluetooth/device-info.html}
  *
  * At the time of writing this API is very unstable and useless.
- * Devices show up as unsupported missing their names, and it does not work on mobile.
+ * Devices show up as unsupported missing their names, and it works terrible on mobile.
  */
 
 export default class BluetoothService {
