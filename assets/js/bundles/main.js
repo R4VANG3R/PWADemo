@@ -3,6 +3,7 @@ import ShareService, { ShareModel } from "./../Services/share.service"
 import BluetoothService from "../Services/bluetooth.service";
 import ForegroundService from "../Services/foreground.service";
 import ScreencaptureService from "../Services/screencapture.service";
+import BatteryService from "../Services/battery.service";
 
 const SERVICEWORKER = './service-worker.js';
 
@@ -25,6 +26,11 @@ class Main {
     document.querySelector("#btnPleasure").addEventListener('click', this.handlePleasureClick.bind(this));
 
     const fg = new ForegroundService();
+
+    document.querySelector("#txtNetworkInfo").innerHTML = `Speed: ${navigator.connection.downlink} MB/s<br>Latency: ${navigator.connection.rtt}`;
+    BatteryService.batteryLevel().then(level => {
+      document.querySelector("#txtBattery").innerHTML = level * 100 + " %";
+    })
   }
 
   handleInstall(e) {

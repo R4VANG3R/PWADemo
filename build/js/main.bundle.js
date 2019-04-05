@@ -12,6 +12,47 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+var BatteryService =
+/*#__PURE__*/
+function () {
+  function BatteryService() {
+    _classCallCheck(this, BatteryService);
+  }
+  /**
+   * @returns {Promise}
+   */
+
+
+  _createClass(BatteryService, null, [{
+    key: "batteryLevel",
+    value: function batteryLevel() {
+      return new Promise(function (resolve, reject) {
+        navigator.getBattery().then(function (value) {
+          return resolve(value.level);
+        });
+      });
+    }
+  }]);
+
+  return BatteryService;
+}();
+
+exports.default = BatteryService;
+
+},{}],2:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 /**
  * @fileoverview Implementation of the Bluetooth Web Api
  * @see {@link https://googlechrome.github.io/samples/web-bluetooth/device-info.html}
@@ -54,7 +95,7 @@ function () {
 
 exports.default = BluetoothService;
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -91,7 +132,7 @@ function () {
 
 exports.default = ForegroundService;
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -148,7 +189,7 @@ function () {
 
 exports.default = NotificationService;
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -213,7 +254,7 @@ function () {
 
 exports.default = ScreencaptureService;
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -272,7 +313,7 @@ var ShareModel = function ShareModel(title, text, url) {
 
 exports.ShareModel = ShareModel;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 "use strict";
 
 var _notification = _interopRequireDefault(require("./../Services/notification.service"));
@@ -284,6 +325,8 @@ var _bluetooth = _interopRequireDefault(require("../Services/bluetooth.service")
 var _foreground = _interopRequireDefault(require("../Services/foreground.service"));
 
 var _screencapture = _interopRequireDefault(require("../Services/screencapture.service"));
+
+var _battery = _interopRequireDefault(require("../Services/battery.service"));
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
 
@@ -318,6 +361,11 @@ function () {
     document.querySelector("#btnScreencapture").addEventListener('click', this.handleScreencaptureClick.bind(this));
     document.querySelector("#btnPleasure").addEventListener('click', this.handlePleasureClick.bind(this));
     var fg = new _foreground.default();
+    document.querySelector("#txtNetworkInfo").innerHTML = "Speed: ".concat(navigator.connection.downlink, " MB/s<br>Latency: ").concat(navigator.connection.rtt);
+
+    _battery.default.batteryLevel().then(function (level) {
+      document.querySelector("#txtBattery").innerHTML = level * 100 + " %";
+    });
   }
 
   _createClass(Main, [{
@@ -408,6 +456,6 @@ function () {
 
 var m = new Main();
 
-},{"../Services/bluetooth.service":1,"../Services/foreground.service":2,"../Services/screencapture.service":4,"./../Services/notification.service":3,"./../Services/share.service":5}]},{},[6])
+},{"../Services/battery.service":1,"../Services/bluetooth.service":2,"../Services/foreground.service":3,"../Services/screencapture.service":5,"./../Services/notification.service":4,"./../Services/share.service":6}]},{},[7])
 
 //# sourceMappingURL=main.bundle.js.map
