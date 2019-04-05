@@ -165,9 +165,53 @@ exports.default = void 0;
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var ScreencaptureService = function ScreencaptureService() {
-  _classCallCheck(this, ScreencaptureService);
-};
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var ScreencaptureService =
+/*#__PURE__*/
+function () {
+  /**
+   *
+   * @param {HTMLVideoElement} videoEl
+   */
+  function ScreencaptureService(videoEl, options) {
+    var _this = this;
+
+    _classCallCheck(this, ScreencaptureService);
+
+    this.videoEl = videoEl;
+    this.options = Object.assign({
+      video: {
+        cursor: "always",
+        displaySurface: "monitor"
+      },
+      audio: false
+    }, options);
+    navigator.mediaDevices.getDisplayMedia(this.options).then(function (stream) {
+      _this.videoEl.srcObject = stream;
+      _this.videoEl.style.display = "block";
+      stream.oninactive = _this.handleCaptureStop.bind(_this);
+    }).catch(function (error) {
+      return console.log("" + error);
+    });
+  }
+
+  _createClass(ScreencaptureService, [{
+    key: "handleCaptureStop",
+    value: function handleCaptureStop(event) {
+      var tracks = this.videoEl.srcObject.getTracks();
+      tracks.forEach(function (track) {
+        return track.stop();
+      });
+      this.videoEl.srcObject = null;
+      this.videoEl.style.display = "none";
+    }
+  }]);
+
+  return ScreencaptureService;
+}();
 
 exports.default = ScreencaptureService;
 
@@ -351,17 +395,7 @@ function () {
   }, {
     key: "handleScreencaptureClick",
     value: function handleScreencaptureClick(event) {
-      navigator.mediaDevices.getDisplayMedia({
-        video: {
-          cursor: "never"
-        },
-        audio: false
-      }).then(function (stream) {
-        console.log(stream);
-        document.querySelector("#vidScreencapture").srcObject = stream;
-      }).catch(function (error) {
-        return console.log("" + error);
-      });
+      new _screencapture.default(document.querySelector("#vidScreencapture"));
     }
   }]);
 

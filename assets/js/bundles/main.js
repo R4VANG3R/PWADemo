@@ -92,18 +92,7 @@ class Main {
   }
 
   handleScreencaptureClick(event) {
-    navigator.mediaDevices.getDisplayMedia({
-      video: {
-        cursor: "never"
-      },
-      audio: false
-    })
-      .then(stream => {
-        console.log(stream);
-        document.querySelector("#vidScreencapture").srcObject = stream;
-      })
-      .catch(error => console.log("" + error))
-
+    new ScreencaptureService(document.querySelector("#vidScreencapture"));
   }
 }
 
